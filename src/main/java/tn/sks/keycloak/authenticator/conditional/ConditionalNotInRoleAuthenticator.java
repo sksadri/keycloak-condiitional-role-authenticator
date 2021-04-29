@@ -6,9 +6,9 @@ import org.keycloak.authentication.authenticators.conditional.ConditionalAuthent
 import org.keycloak.models.*;
 import org.keycloak.models.utils.KeycloakModelUtils;
 
-public class ConditionalRoleAuthenticator implements ConditionalAuthenticator {
-    public static final ConditionalRoleAuthenticator SINGLETON = new ConditionalRoleAuthenticator();
-    private static final Logger logger = Logger.getLogger(ConditionalRoleAuthenticator.class);
+public class ConditionalNotInRoleAuthenticator implements ConditionalAuthenticator {
+    public static final ConditionalNotInRoleAuthenticator SINGLETON = new ConditionalNotInRoleAuthenticator();
+    private static final Logger logger = Logger.getLogger(ConditionalNotInRoleAuthenticator.class);
     
     @Override
     public boolean matchCondition(AuthenticationFlowContext context) {
@@ -17,7 +17,7 @@ public class ConditionalRoleAuthenticator implements ConditionalAuthenticator {
         AuthenticatorConfigModel authConfig = context.getAuthenticatorConfig();
         
         if (user != null && authConfig != null && authConfig.getConfig() != null) {
-            String skipRole = authConfig.getConfig().get(ConditionalRoleAuthenticatorFactory.CONDITIONAL_USER_ROLE);
+            String skipRole = authConfig.getConfig().get(ConditionalNotInRoleAuthenticatorFactory.CONDITIONAL_USER_ROLE);
             RoleModel role = KeycloakModelUtils.getRoleFromString(realm, skipRole);
             if (role == null) {
                 logger.errorv("Invalid role name submitted: {0}", skipRole);

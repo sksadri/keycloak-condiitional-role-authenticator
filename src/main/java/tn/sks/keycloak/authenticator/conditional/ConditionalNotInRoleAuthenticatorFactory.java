@@ -1,7 +1,7 @@
 package tn.sks.keycloak.authenticator.conditional;
 
 import org.keycloak.Config;
-import org.keycloak.models.AuthenticationExecutionModel;
+
 import static org.keycloak.models.AuthenticationExecutionModel.Requirement;
 import org.keycloak.authentication.authenticators.conditional.ConditionalAuthenticator;
 import org.keycloak.authentication.authenticators.conditional.ConditionalAuthenticatorFactory;
@@ -12,7 +12,7 @@ import org.keycloak.provider.ProviderConfigurationBuilder;
 import java.util.Collections;
 import java.util.List;
 
-public class ConditionalRoleAuthenticatorFactory implements ConditionalAuthenticatorFactory {
+public class ConditionalNotInRoleAuthenticatorFactory implements ConditionalAuthenticatorFactory {
     public static final String PROVIDER_ID = "conditional-user-not-in-role";
     protected static final String CONDITIONAL_USER_ROLE = "condUserNotInRole";
     
@@ -29,7 +29,7 @@ public class ConditionalRoleAuthenticatorFactory implements ConditionalAuthentic
     
     @Override
     public ConditionalAuthenticator getSingleton() {
-        return ConditionalRoleAuthenticator.SINGLETON;
+        return ConditionalNotInRoleAuthenticator.SINGLETON;
     }
 
     @Override
